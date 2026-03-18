@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+.venv/
+dist/
+build/
+*.egg-info/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# GCP credentials
+*.json
+!cors.json
+service-account*.json
+gcp-key*.json
+credentials*.json
+
+# Docker (local only)
+.dockerignore
+docker-compose.yml
+docker-compose*.yml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Word / Office documents
+*.docx
+*.doc
+*.xlsx
+*.pptx
+
+# Secrets
+secrets/
+*.key
+*.pem
+*.crt
+
+# Terraform (nếu dùng sau này)
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+
+# Kubernetes secrets (không commit)
+manifests/secret.yaml
+*-secret.yaml
+tutorial.md
+
+images/
