@@ -4,6 +4,6 @@ metadata:
   name: backend-config
   namespace: default
 data:
-  DB_HOST: "<CLOUD_SQL_PRIVATE_IP>"   # thay bằng Private IP của Cloud SQL instance
+  DB_HOST: "10.112.0.3"
   DB_NAME: "appdb"
   DB_USER: "appuser"
