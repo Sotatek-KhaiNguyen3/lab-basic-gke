@@ -5,7 +5,7 @@ from sqlalchemy.orm import declarative_base, sessionmaker, Session
 from pydantic import BaseModel
 from datetime import datetime, timezone
 from google.cloud import secretmanager
-from urllib.parse import quote_plus
+from sqlalchemy.engine import URL
 import os
 import time
 import logging
@@ -26,7 +26,13 @@ def get_secret(secret_id: str) -> str:
 
 DB_PASS = get_secret("db-pass")
 
-DATABASE_URL = f"mysql+pymysql://{DB_USER}:{quote_plus(DB_PASS)}@{DB_HOST}/{DB_NAME}"
+DATABASE_URL = URL.create(
+    drivername="mysql+pymysql",
+    username=DB_USER,
+    password=DB_PASS,
+    host=DB_HOST,
+    database=DB_NAME,
+)
 
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
