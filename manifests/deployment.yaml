@@ -13,9 +13,10 @@ spec:
       labels:
         app: backend
     spec:
+      serviceAccountName: backend-sa
       containers:
         - name: backend
-          image: asia-southeast1-docker.pkg.dev/gke-basic-labs/my-app-repo/backend:1.0.0
+          image: asia-southeast1-docker.pkg.dev/gke-basic-labs/my-app-repo/backend:1.1.0
           ports:
             - containerPort: 8000
           env:
