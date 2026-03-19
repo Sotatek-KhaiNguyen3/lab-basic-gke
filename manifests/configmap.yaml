@@ -4,7 +4,7 @@ metadata:
   name: backend-config
   namespace: default
 data:
-  DB_HOST: "10.112.0.3"
+  DB_HOST: "10.112.0.5"
   DB_NAME: "appdb"
   DB_USER: "appuser"
   GCP_PROJECT: "gke-basic-labs"
