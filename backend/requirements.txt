@@ -4,3 +4,4 @@ sqlalchemy==2.0.35
 pymysql==1.1.1
 cryptography==43.0.1
 pydantic==2.9.2
+google-cloud-secret-manager==2.20.0

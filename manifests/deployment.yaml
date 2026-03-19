@@ -34,11 +34,11 @@ spec:
                 configMapKeyRef:
                   name: backend-config
                   key: DB_USER
-            - name: DB_PASS
+            - name: GCP_PROJECT
               valueFrom:
-                secretKeyRef:
-                  name: backend-secret
-                  key: DB_PASS
+                configMapKeyRef:
+                  name: backend-config
+                  key: GCP_PROJECT
           readinessProbe:
             httpGet:
               path: /health

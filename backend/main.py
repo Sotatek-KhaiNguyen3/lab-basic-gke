@@ -4,6 +4,8 @@ from sqlalchemy import create_engine, Column, Integer, String, Boolean, DateTime
 from sqlalchemy.orm import declarative_base, sessionmaker, Session
 from pydantic import BaseModel
 from datetime import datetime, timezone
+from google.cloud import secretmanager
+from urllib.parse import quote_plus
 import os
 import time
 import logging
@@ -15,9 +17,16 @@ log = logging.getLogger(__name__)
 DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_NAME = os.getenv("DB_NAME", "appdb")
 DB_USER = os.getenv("DB_USER", "appuser")
-DB_PASS = os.getenv("DB_PASS", "password")
+GCP_PROJECT = os.getenv("GCP_PROJECT")
 
-DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_NAME}"
+def get_secret(secret_id: str) -> str:
+    client = secretmanager.SecretManagerServiceClient()
+    name = f"projects/{GCP_PROJECT}/secrets/{secret_id}/versions/latest"
+    return client.access_secret_version(request={"name": name}).payload.data.decode("utf-8")
+
+DB_PASS = get_secret("db-pass")
+
+DATABASE_URL = f"mysql+pymysql://{DB_USER}:{quote_plus(DB_PASS)}@{DB_HOST}/{DB_NAME}"
 
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
