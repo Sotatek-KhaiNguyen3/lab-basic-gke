@@ -3,8 +3,6 @@ kind: Service
 metadata:
   name: backend-svc
   namespace: default
-  annotations:
-    cloud.google.com/backend-config: '{"default": "backend-config"}'
 spec:
   selector:
     app: backend

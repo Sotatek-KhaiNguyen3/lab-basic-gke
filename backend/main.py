@@ -104,6 +104,7 @@ def get_db():
 
 
 # ── Routes ────────────────────────────────────────────────────────────────────
+@app.get("/")
 @app.get("/health")
 def health():
     return {"status": "ok"}
