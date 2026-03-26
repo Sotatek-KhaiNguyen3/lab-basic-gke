@@ -8,5 +8,5 @@ spec:
     app: backend
   ports:
     - port: 80
-      targetPort: 8000
-  type: LoadBalancer
+      targetPort: {{ .Values.backend.port }}
+  type: ClusterIP

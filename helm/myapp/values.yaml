@@ -1,0 +1,28 @@
+project: project-for-lab
+region: asia-southeast1
+domain: "GATEWAY_IP.sslip.io"  # thay GATEWAY_IP bằng IP thật, dùng dấu - thay . vd: 34-120-50-100.sslip.io
+certMap: lab-cert-map
+
+backend:
+  image: asia-southeast1-docker.pkg.dev/project-for-lab/my-app-repo/backend
+  tag: latest
+  replicas: 2
+  port: 8000
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "500m"
+      memory: "256Mi"
+
+frontend:
+  image: asia-southeast1-docker.pkg.dev/project-for-lab/my-app-repo/frontend
+  tag: latest
+  replicas: 2
+  port: 80
+
+db:
+  host: "10.0.0.X"   # Private IP của Cloud SQL — cập nhật sau khi tạo instance
+  name: appdb
+  user: appuser

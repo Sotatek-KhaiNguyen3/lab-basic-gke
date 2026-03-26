@@ -24,7 +24,7 @@ def get_secret(secret_id: str) -> str:
     name = f"projects/{GCP_PROJECT}/secrets/{secret_id}/versions/latest"
     return client.access_secret_version(request={"name": name}).payload.data.decode("utf-8")
 
-DB_PASS = get_secret("db-pass")
+DB_PASS = os.getenv("DB_PASS") or get_secret("db-pass")
 
 DATABASE_URL = URL.create(
     drivername="mysql+pymysql",
