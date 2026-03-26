@@ -119,7 +119,7 @@ gcloud sql databases create appdb --instance=lab-mysql
 
 gcloud sql users create appuser \
   --instance=lab-mysql \
-  --password=STRONG_PASSWORD_HERE
+  --password=L@bMySQL#2026
 ```
 
 ```bash
@@ -149,7 +149,7 @@ gcloud artifacts repositories create $REPO_NAME \
 
 ```bash
 # DB password
-echo -n "STRONG_PASSWORD_HERE" | gcloud secrets create db-pass --data-file=-
+echo -n "L@bMySQL#2026" | gcloud secrets create db-pass --data-file=-
 
 # GitHub Personal Access Token (cần quyền: repo full, admin:repo_hook)
 echo -n "ghp_YOUR_TOKEN_HERE" | gcloud secrets create github-token --data-file=-
