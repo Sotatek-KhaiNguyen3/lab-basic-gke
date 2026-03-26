@@ -10,15 +10,27 @@
 
 ## Biến môi trường
 
+Lưu vào file `.env` ở root repo, `source` lại mỗi khi mở terminal mới:
+
 ```bash
+# .env
 export PROJECT_ID="project-for-lab"
 export REGION="asia-southeast1"
 export ZONE="asia-southeast1-a"
 export CLUSTER_NAME="gke-advanced"
 export REPO_NAME="my-app-repo"
-export GITHUB_REPO="your-org/your-repo"  # GitHub repo chứa code
+export GITHUB_REPO="Sotatek-KhaiNguyen3/lab-basic-gke"
 ```
 
+```bash
+# Load biến (chạy lại mỗi khi mở terminal mới)
+source .env
+
+# Kiểm tra
+echo $PROJECT_ID
+```
+
+> `.env` đã có trong `.gitignore` — không bị commit lên repo.
 > `$DOMAIN` sẽ được tạo tự động từ IP của Gateway ở Phần 10, không cần khai báo trước.
 
 ---
@@ -423,7 +435,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/YOUR_ORG/YOUR_REPO.git
+    repoURL: https://github.com/Sotatek-KhaiNguyen3/lab-basic-gke.git
     targetRevision: HEAD
     path: helm/myapp
     helm:
