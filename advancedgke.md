@@ -8,28 +8,35 @@
 
 ---
 
-## Biến môi trường
+## Bước 0 — Biến môi trường (làm trước tiên, một lần duy nhất)
 
-Lưu vào file `.env` ở root repo, `source` lại mỗi khi mở terminal mới:
+**Terminal:** Toàn bộ lab này chạy trên **Google Cloud Shell** (trình duyệt → GCP Console → click icon Cloud Shell góc trên phải). Không cần cài gcloud local.
+
+**Tạo file `.env` trên Cloud Shell:**
 
 ```bash
-# .env
+# Clone repo về Cloud Shell trước
+git clone https://github.com/Sotatek-KhaiNguyen3/lab-basic-gke.git
+cd lab-basic-gke
+
+# Tạo file .env ngay trong thư mục repo
+cat > .env << 'EOF'
 export PROJECT_ID="project-for-lab"
 export REGION="asia-southeast1"
 export ZONE="asia-southeast1-a"
 export CLUSTER_NAME="gke-advanced"
 export REPO_NAME="my-app-repo"
 export GITHUB_REPO="Sotatek-KhaiNguyen3/lab-basic-gke"
-```
+EOF
 
-```bash
-# Load biến (chạy lại mỗi khi mở terminal mới)
+# Load biến vào session hiện tại
 source .env
 
 # Kiểm tra
-echo $PROJECT_ID
+echo $PROJECT_ID   # → project-for-lab
 ```
 
+> **Mỗi lần mở Cloud Shell mới** phải `cd lab-basic-gke && source .env` lại — Cloud Shell không lưu biến giữa các session.
 > `.env` đã có trong `.gitignore` — không bị commit lên repo.
 > `$DOMAIN` sẽ được tạo tự động từ IP của Gateway ở Phần 10, không cần khai báo trước.
 
