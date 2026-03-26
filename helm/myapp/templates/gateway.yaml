@@ -19,6 +19,4 @@ spec:
       protocol: HTTPS
       tls:
         mode: Terminate
-        options:
-          networking.gke.io/cert-map: {{ .Values.certMap | quote }}
     {{- end }}
