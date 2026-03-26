@@ -6,8 +6,10 @@ metadata:
 spec:
   parentRefs:
     - name: lab-gateway
+  {{- if .Values.domain }}
   hostnames:
     - {{ .Values.domain | quote }}
+  {{- end }}
   rules:
     - matches:
         - path:

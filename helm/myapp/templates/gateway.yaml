@@ -3,16 +3,22 @@ kind: Gateway
 metadata:
   name: lab-gateway
   namespace: default
+  {{- if .Values.certMap }}
   annotations:
     networking.gke.io/certmap: {{ .Values.certMap }}
+  {{- end }}
 spec:
   gatewayClassName: gke-l7-global-external-managed
   listeners:
+    - name: http
+      port: 80
+      protocol: HTTP
+    {{- if .Values.certMap }}
     - name: https
       port: 443
       protocol: HTTPS
       tls:
         mode: Terminate
-    - name: http
-      port: 80
-      protocol: HTTP
+        options:
+          networking.gke.io/cert-map: {{ .Values.certMap | quote }}
+    {{- end }}

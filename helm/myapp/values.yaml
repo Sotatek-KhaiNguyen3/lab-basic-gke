@@ -1,7 +1,7 @@
 project: project-for-lab
 region: asia-southeast1
-domain: "GATEWAY_IP.sslip.io"  # thay GATEWAY_IP bằng IP thật, dùng dấu - thay . vd: 34-120-50-100.sslip.io
-certMap: lab-cert-map
+domain: ""     # để trống, cập nhật sau khi có Gateway IP (dạng: 34-120-50-100.sslip.io)
+certMap: ""    # để trống, cập nhật sau khi tạo cert map
 
 backend:
   image: asia-southeast1-docker.pkg.dev/project-for-lab/my-app-repo/backend
