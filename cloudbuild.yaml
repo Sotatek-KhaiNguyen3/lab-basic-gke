@@ -1,0 +1,31 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [build, -t, 'asia-southeast1-docker.pkg.dev/$PROJECT_ID/my-app-repo/backend:$SHORT_SHA', ./backend]
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [build, -t, 'asia-southeast1-docker.pkg.dev/$PROJECT_ID/my-app-repo/frontend:$SHORT_SHA', ./frontend]
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [push, 'asia-southeast1-docker.pkg.dev/$PROJECT_ID/my-app-repo/backend:$SHORT_SHA']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [push, 'asia-southeast1-docker.pkg.dev/$PROJECT_ID/my-app-repo/frontend:$SHORT_SHA']
+
+  - name: 'alpine/git'
+    entrypoint: sh
+    args:
+      - '-c'
+      - |
+        git config user.email "cloudbuild@ci"
+        git config user.name "Cloud Build"
+        sed -i "s|tag: .*|tag: $SHORT_SHA|" helm/myapp/values.yaml
+        git add helm/myapp/values.yaml
+        git diff --cached --quiet || git commit -m "ci: bump image tag to $SHORT_SHA [skip ci]"
+        git push origin HEAD
+
+substitutions:
+  _REGION: asia-southeast1
+  _REPO: my-app-repo
+
+options:
+  logging: CLOUD_LOGGING_ONLY
