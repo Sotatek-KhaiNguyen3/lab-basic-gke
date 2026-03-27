@@ -13,15 +13,22 @@ steps:
 
   - name: 'alpine/git'
     entrypoint: sh
+    secretEnv: ['GITHUB_TOKEN']
     args:
       - '-c'
       - |
         git config user.email "cloudbuild@ci"
         git config user.name "Cloud Build"
+        git remote set-url origin https://x-access-token:$$GITHUB_TOKEN@github.com/Sotatek-KhaiNguyen3/lab-basic-gke.git
         sed -i "s|tag: .*|tag: $SHORT_SHA|" helm/myapp/values.yaml
         git add helm/myapp/values.yaml
         git diff --cached --quiet || git commit -m "ci: bump image tag to $SHORT_SHA [skip ci]"
         git push origin HEAD
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/$PROJECT_ID/secrets/github-token/versions/latest
+      env: 'GITHUB_TOKEN'
 
 substitutions:
   _REGION: asia-southeast1
