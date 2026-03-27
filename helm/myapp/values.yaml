@@ -1,10 +1,10 @@
-project: project-for-lab
+project: project-for-lab-491108
 region: asia-southeast1
-domain: ""     # để trống, cập nhật sau khi có Gateway IP (dạng: 34-120-50-100.sslip.io)
-certMap: ""    # để trống, cập nhật sau khi tạo cert map
+domain: "34-49-166-226.sslip.io"
+certMap: "lab-cert-map"
 
 backend:
-  image: asia-southeast1-docker.pkg.dev/project-for-lab/my-app-repo/backend
+  image: asia-southeast1-docker.pkg.dev/project-for-lab-491108/my-app-repo/backend
   tag: latest
   replicas: 2
   port: 8000
@@ -17,12 +17,12 @@ backend:
       memory: "256Mi"
 
 frontend:
-  image: asia-southeast1-docker.pkg.dev/project-for-lab/my-app-repo/frontend
+  image: asia-southeast1-docker.pkg.dev/project-for-lab-491108/my-app-repo/frontend
   tag: latest
   replicas: 2
   port: 80
 
 db:
-  host: "10.0.0.X"   # Private IP của Cloud SQL — cập nhật sau khi tạo instance
+  host: "10.47.0.3"
   name: appdb
   user: appuser
