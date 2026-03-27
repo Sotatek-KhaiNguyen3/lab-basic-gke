@@ -5,7 +5,7 @@ certMap: ""    # để trống, cập nhật sau khi tạo cert map
 
 backend:
   image: asia-southeast1-docker.pkg.dev/project-for-lab/my-app-repo/backend
-  tag: latest
+  tag: dfffe23
   replicas: 2
   port: 8000
   resources:
@@ -18,7 +18,7 @@ backend:
 
 frontend:
   image: asia-southeast1-docker.pkg.dev/project-for-lab/my-app-repo/frontend
-  tag: latest
+  tag: dfffe23
   replicas: 2
   port: 80
 
