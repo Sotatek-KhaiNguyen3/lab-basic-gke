@@ -60,5 +60,6 @@ secrets/
 manifests/secret.yaml
 *-secret.yaml
 tutorial.md
+advancedgke.md
 
 images/
